@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SET</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="main_title">SET</string>
+    <string name="main_start">start</string>
+
+</resources>
