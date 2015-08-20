@@ -79,35 +79,30 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 		Paint paint = new Paint();
 		Matrix matrix = new Matrix();
 		
-		
-		
-		
-		
-		
 		canvas.drawColor(res.getColor(R.color.base_white));
 		
 		if (mColor != 0 && mShape != 0) {
 			canvas.drawColor(res.getColor(mColor));
 			
 			Bitmap bitmapShape = BitmapFactory.decodeResource(mContext.getResources(), mShape);
+			PorterDuffColorFilter filter = new PorterDuffColorFilter(res.getColor(mColor), Mode.MULTIPLY);
 			matrix.setScale(((float) getWidth()) / bitmapShape.getWidth(), ((float) getHeight()) / bitmapShape.getHeight());
 			canvas.drawBitmap(bitmapShape, matrix, paint);
 			
 			if (mFilterType == 1) { 
 				
 				Drawable drawable = res.getDrawable(R.drawable.base_filter);
-				drawable.mutate().setColorFilter(res.getColor(mColor), Mode.SRC_IN);
+				drawable.mutate();
+				paint.setColorFilter(filter);
 				canvas.drawBitmap(((BitmapDrawable) drawable).getBitmap(), matrix, paint);
 			} else if (mFilterType == 2) {
 				matrix.postScale(smallFilterRatio, smallFilterRatio);
 				float delta = ((1.0f - smallFilterRatio) / 2.0f);
 				matrix.postTranslate(getWidth() * delta, getHeight() * delta);
 				
-				Bitmap mutableBitmap = bitmapShape.copy(Bitmap.Config.ARGB_8888, true);
-				bitmapShape.recycle();
-				bitmapShape = null;
-				Drawable d = new BitmapDrawable(mutableBitmap);
-				d.mutate().setColorFilter(res.getColor(mColor), Mode.MULTIPLY);
+				Drawable d = new BitmapDrawable(bitmapShape);
+				d.mutate();
+				paint.setColorFilter(filter);
 				canvas.drawBitmap(((BitmapDrawable) d).getBitmap(), matrix, paint);
 			}
 		}
