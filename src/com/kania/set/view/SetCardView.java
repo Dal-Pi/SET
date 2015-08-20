@@ -1,6 +1,10 @@
 package com.kania.set.view;
 
+import java.util.ArrayList;
+
 import com.kania.set.R;
+import com.kania.set.model.ColorProvider;
+import com.kania.set.model.ShapeProvider;
 import com.kania.set.presenter.Mediator;
 
 import android.content.Context;
@@ -18,6 +22,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,6 +40,7 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 	private int mShape;
 	private int mColor;
 	private int mFilterType;
+	private FrameLayout mBackground;
 	
 	private Mediator mediator;
 
@@ -45,36 +51,57 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 		mShape = 0;
 		mColor = 0;
 		mFilterType = 0;
+		mSelected = false;
 		setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Toast.makeText(mContext, "onClick() on SetCardView" + mCardSlotNum, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "onClick() on SetCardView" + mCardSlotNum, Toast.LENGTH_SHORT).show();
 		mediator.pushSetCard(mCardSlotNum);
 		
 	}
 	
 	@Override
 	public void initCard(int color, int shape, int filterType) {
-		// TODO Auto-generated method stub
-		setColor(color);
-		setShape(shape);
+		mSelected = false;
+		mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_transparent));
+		setCard(color, shape, filterType);
+	}
+	
+	//TODO needs to improve
+	public void setCard(int color, int shape, int filterType) {
+		ArrayList<Integer> colors = ColorProvider.getColors(3);
+		ArrayList<Integer> shapes = ShapeProvider.getShapes(3);
+		setColor(colors.get(color));
+		setShape(shapes.get(shape));
 		setFilterType(filterType);
 		this.invalidate();
 	}
+	
+	@Override
+	public void lockCard() {
+		this.setClickable(false);
+	}
+	@Override
+	public void releaseCard() {
+		this.setClickable(true);
+	}
 
 	@Override
-	public void updateCard() {
-		// TODO Auto-generated method stub
-		Toast.makeText(mContext, "updateCard() on SetCardView + " + mCardSlotNum, Toast.LENGTH_SHORT).show();
+	public void updateCard(boolean enable) {
+		mSelected = enable;
+		if (enable)
+			mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_white));
+		else 
+			mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_transparent));
+		//debug
+		//Toast.makeText(mContext, "updateCard() on SetCardView + " + mCardSlotNum, Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		
 		Resources res = mContext.getResources();
 		Paint paint = new Paint();
 		Matrix matrix = new Matrix();
@@ -115,6 +142,10 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 	
 	public void setCardSlotNum(int num) {
 		mCardSlotNum = num;
+	}
+	
+	public void setBackgroundLayout(FrameLayout bg) {
+		mBackground = bg;
 	}
 	
 	public void setSelectCard(boolean select) {
