@@ -21,6 +21,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -31,7 +32,7 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 	public static final boolean SELECTED = true;
 	public static final boolean NOT_SELECTED = false;
 	
-	public final float smallFilterRatio = 0.9f;
+	public final float smallFilterRatio = 0.8f;
 	
 	private Context mContext;
 	
@@ -65,8 +66,6 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 	
 	@Override
 	public void initCard(int color, int shape, int filterType) {
-		mSelected = false;
-		mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_transparent));
 		setCard(color, shape, filterType);
 	}
 	
@@ -90,12 +89,15 @@ public class SetCardView extends ImageView implements View.OnClickListener, ISet
 	}
 
 	@Override
-	public void updateCard(boolean enable) {
+	public void updateCardBG(boolean enable) {
 		mSelected = enable;
-		if (enable)
-			mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_white));
-		else 
+		if (mSelected) {
+			mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_lightgray));
+			Log.d("SET", "selected-" + mCardSlotNum + " / mSelected=" + mSelected);
+		} else { 
 			mBackground.setBackgroundColor(mContext.getResources().getColor(R.color.base_transparent));
+			Log.d("SET", "deselected-" + mCardSlotNum + " / mSelected=" + mSelected);
+		}
 		//debug
 		//Toast.makeText(mContext, "updateCard() on SetCardView + " + mCardSlotNum, Toast.LENGTH_SHORT).show();
 	}

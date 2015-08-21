@@ -9,6 +9,6 @@ public interface ISetCardAction {
 	public abstract void lockCard();
 	public abstract void releaseCard();
 	
-	public abstract void updateCard(boolean enable); //needs card data as augments
+	public abstract void updateCardBG(boolean enable); //needs card data as augments
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Mediator {
 	public abstract void startGame();
 	
-	public abstract void makeDeckAndSetToView(int amount);
+	public abstract void makeDeck(int amount);
 	
 	public abstract void lockAllCards();
 	public abstract void releaseAllCards();

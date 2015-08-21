@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#00333333" >
+    android:background="#FFFFFFFF" >
     
     <LinearLayout 
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:id="@+id/imgPannelNoti" 
             android:layout_width="160dp"
             android:layout_height="160dp"
+            android:elevation="5dp"
             android:padding="10dp"
             android:src="@drawable/answer_right"
             />
@@ -78,35 +79,41 @@
                 android:id="@+id/setBGCard1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard1" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
             
             <FrameLayout
                 android:id="@+id/setBGCard2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard2" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/setBGCard3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard3" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
         </LinearLayout>
         
@@ -121,34 +128,40 @@
                 android:id="@+id/setBGCard4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard4" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/setBGCard5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard5" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/setBGCard6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard6" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
         </LinearLayout>
         
@@ -163,34 +176,40 @@
                 android:id="@+id/setBGCard7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard7" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/setBGCard8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard8" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/setBGCard9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" 
+                android:layout_margin="1dp"
                 android:layout_weight="1" >
                 <com.kania.set.view.SetCardView
 	                android:id="@+id/setCard9" 
 		            android:layout_width="match_parent"
 		            android:layout_height="match_parent"
-		            android:layout_margin="5dp" />
+		            android:elevation="5dp"
+		            android:layout_margin="10dp" />
             </FrameLayout>
         </LinearLayout>
         
