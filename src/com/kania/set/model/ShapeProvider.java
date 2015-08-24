@@ -11,7 +11,7 @@ public class ShapeProvider {
 		ArrayList<Integer> retShapes = new ArrayList<Integer>();
 		//TODO change to random
 		for(int i = 0; i < amount; ++i) {
-			retShapes.add(mShapes[i % amount]);
+			retShapes.add(mShapes[i % mShapes.length]);
 		}
 		return retShapes;
 	}

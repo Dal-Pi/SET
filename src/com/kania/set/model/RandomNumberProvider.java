@@ -6,14 +6,14 @@ import java.util.Random;
 import android.util.Log;
 
 public class RandomNumberProvider {
-	private Random random;
+	private static Random random = new Random();
 	
 	public RandomNumberProvider() {
 		random = new Random(); //TODO ***** need seed?
 	}
 	
 	//TODO need verification
-	public ArrayList<Integer> getRandomNumber(int amount) {
+	public static ArrayList<Integer> getRandomNumber(int amount) {
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		int[] retTemp = new int[amount];
 		

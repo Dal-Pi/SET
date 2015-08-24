@@ -22,7 +22,6 @@ public class SetPresenter extends Mediator {
 	private ISetPannelAction mSetPannel;
 	private SetGameData mSetGameData;
 	private SetDeckData mSetDeckData;
-	private RandomNumberProvider mRandomNumberProvider;
 	private ArrayList<Integer> mCardPositions;
 	private ArrayList<SetCardData> mCandidates;
 
@@ -48,9 +47,8 @@ public class SetPresenter extends Mediator {
 		lockAllCards();
 		
 		mSetGameData = new SetGameData();
-		mRandomNumberProvider = new RandomNumberProvider();
 		mCandidates = new ArrayList<SetCardData>();
-		mCardPositions = mRandomNumberProvider.getRandomNumber(mCardViews.size());
+		mCardPositions = RandomNumberProvider.getRandomNumber(mCardViews.size());
 
 		makeDeck(mCardViews.size());
 		initAllCards();
@@ -63,7 +61,7 @@ public class SetPresenter extends Mediator {
 	public void makeDeck(int amount) {
 		//make deck
 		mCardPositions.clear();
-		mCardPositions = mRandomNumberProvider.getRandomNumber(mCardViews.size());
+		mCardPositions = RandomNumberProvider.getRandomNumber(mCardViews.size());
 		mSetDeckData = mSetEngine.getNewDeck(mCardViews.size());
 	}
 

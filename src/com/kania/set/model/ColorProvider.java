@@ -11,7 +11,7 @@ public class ColorProvider {
 		ArrayList<Integer> retColors = new ArrayList<Integer>();
 		//TODO change to random
 		for(int i = 0; i < amount; ++i) {
-			retColors.add(mColors[i % amount]);
+			retColors.add(mColors[i % mColors.length]);
 		}
 		return retColors;
 	}
