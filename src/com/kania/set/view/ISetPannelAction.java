@@ -6,5 +6,7 @@ public interface ISetPannelAction {
 	public abstract void setAddedScore(int addedScore);
 	
 	public abstract void setNotiImage(boolean status);
+	
+	public abstract void setEnableHint(boolean enabled);
 
 }

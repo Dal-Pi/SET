@@ -11,13 +11,12 @@ public class SetEngine {
 	public final int DECK_SCORE_BASE = 3;
 	public final int GAME_STYLE_TIMEATTACK = 9;
 	
-	ArrayList<SetCardData> mHintCards;
+	public final int MAX_HINT_COUNT = 2;
+	
 	public SetEngine() {
-		mHintCards = new ArrayList<SetCardData>();
 	}
 	
 	public SetDeckData getNewDeck(int amount) {
-		//debug stub
 		ArrayList<SetCardData> cardList = getAllCards();
 		ArrayList<SetCardData> randomCardList = new ArrayList<SetCardData>();
 		ArrayList<SetCardData> newCards = new ArrayList<SetCardData>();
@@ -26,8 +25,6 @@ public class SetEngine {
 			randomCardList.add(cardList.get(sequence.get(i)));
 		}
 		
-		//init hint
-		mHintCards.clear();
 		//select two cards
 		SetCardData firstCard = randomCardList.get(sequence.get(0));
 		SetCardData secondCard = randomCardList.get(sequence.get(1));
@@ -35,9 +32,6 @@ public class SetEngine {
 		newCards.add(firstCard);
 		Log.d("SET", "Find second card! :" + secondCard.getColor() + secondCard.getShape() + secondCard.getFilter());
 		newCards.add(secondCard);
-		//add hint as first and second cards
-		mHintCards.add(firstCard);
-		mHintCards.add(secondCard);
 		//remove card for avoid duplication
 		randomCardList.remove(firstCard);
 		randomCardList.remove(secondCard);
@@ -94,6 +88,25 @@ public class SetEngine {
 		return new SetDeckData(newCards, DECK_SCORE_BASE);
 	}
 	
+//	public SetDeckData getNewDeck(int amount) {
+//		//debug stub
+//		ArrayList<SetCardData> newCards = new ArrayList<SetCardData>();
+//		
+//		
+//		newCards.add(new SetCardData(0, 0, 0));
+//		newCards.add(new SetCardData(0, 0, 0));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		newCards.add(new SetCardData(2, 2, 2));
+//		
+//		
+//		return new SetDeckData(newCards, DECK_SCORE_BASE);
+//	}
+	
 	public ArrayList<SetCardData> getAllCards() {
 		ArrayList<SetCardData> alCards = new ArrayList<SetCardData>();
 
@@ -122,14 +135,5 @@ public class SetEngine {
 			return true;
 		else 
 			return false;
-	}
-	
-	public SetCardData getHint(int times) {
-		if (times == 1)
-			return mHintCards.get(0);
-		else if (times == 2)
-			return mHintCards.get(1);
-		else
-			return null;
 	}
 }

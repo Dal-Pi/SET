@@ -30,7 +30,8 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	private TextView mSumScore;
 	private TextView mAddedScore;
 	
-	private int mShortAnibationDuration;
+	private int mLongAnimationDuration;
+	private int mShortAnimationDuration;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,9 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		presenter.setPannel(this);
 		
 		//retrive and cache the system's default "short" animation time.
-		mShortAnibationDuration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
+		 mLongAnimationDuration = mShortAnimationDuration = 2000;
+		//mLongAnimationDuration = getResources().getInteger(android.R.integer.config_longAnimTime);
+		//mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 		
 		
 		//if prepared all settings, start game
@@ -67,10 +70,9 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btnGameHint:
-			Toast.makeText(this, "not implement yet", Toast.LENGTH_SHORT).show();
+			presenter.pushHint();
 			break;
 		}
 		
@@ -90,18 +92,32 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	public void setNotiImage(boolean status) {
 		if (status) {
 			mNotiImage.setImageDrawable(getResources().getDrawable(R.drawable.answer_right));
+			crossfadeAddedScore();
 		} else {
 			mNotiImage.setImageDrawable(getResources().getDrawable(R.drawable.answer_wrong));
 		}
 		crossfadeNotiImage();
 	}
 	
+	private void crossfadeAddedScore() {
+		mAddedScore.setAlpha(1f);
+		mAddedScore.animate()
+			.alpha(0f)
+			.setDuration(2000)
+			.setListener(null);
+	}
+	
 	private void crossfadeNotiImage() {
 		mNotiImage.setAlpha(1f);
 		mNotiImage.animate()
 			.alpha(0f)
-			.setDuration(mShortAnibationDuration)
+			.setDuration(mLongAnimationDuration)
 			.setListener(null);
+	}
+	
+	@Override
+	public void setEnableHint(boolean enabled) {
+		mBtnHint.setEnabled(enabled);
 	}
 
 }

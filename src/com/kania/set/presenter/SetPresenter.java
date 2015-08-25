@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
+import com.kania.set.model.ColorProvider;
 import com.kania.set.model.RandomNumberProvider;
 import com.kania.set.model.SetCardData;
 import com.kania.set.model.SetDeckData;
@@ -24,6 +25,8 @@ public class SetPresenter extends Mediator {
 	private SetDeckData mSetDeckData;
 	private ArrayList<Integer> mCardPositions;
 	private ArrayList<SetCardData> mCandidates;
+	
+	private int mHintCount;
 
 	public SetPresenter() {
 		//init view and model
@@ -59,10 +62,15 @@ public class SetPresenter extends Mediator {
 
 	@Override
 	public void makeDeck(int amount) {
+		//refresh color and ...TODO
+		ColorProvider.refreshColors();
 		//make deck
 		mCardPositions.clear();
 		mCardPositions = RandomNumberProvider.getRandomNumber(mCardViews.size());
 		mSetDeckData = mSetEngine.getNewDeck(mCardViews.size());
+		//init hint
+		mHintCount = 0;
+		mSetPannel.setEnableHint(true);
 	}
 
 	@Override
@@ -118,6 +126,7 @@ public class SetPresenter extends Mediator {
 					isRight = true;
 					mSetPannel.setNotiImage(true);
 					mSetPannel.setAddedScore(mSetDeckData.getScore());
+					//it will make large array.
 					mSetGameData.addDeck(mSetDeckData);
 					mSetPannel.setSumScore(mSetGameData.getScoreSum());
 				} else {
@@ -132,6 +141,21 @@ public class SetPresenter extends Mediator {
 				releaseAllCards();
 				break;
 			}
+		}
+	}
+	
+	@Override
+	public void pushHint() {
+		initAllCards();
+		int nowDeckScore = mSetDeckData.getScore();
+		mSetDeckData.setScore(1);
+		for (int i = 0; i <= mHintCount; ++i) {
+			pushSetCard(mCardPositions.get(i));
+		}
+		mHintCount++;
+		if (mHintCount >= 2) {
+			mSetDeckData.setScore(0);
+			mSetPannel.setEnableHint(false);
 		}
 	}
 }
