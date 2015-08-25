@@ -1,5 +1,7 @@
 package com.kania.set.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +30,8 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	private TextView mSumScore;
 	private TextView mAddedScore;
 	
+	private int mShortAnibationDuration;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +56,9 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		mAddedScore = (TextView)findViewById(R.id.textPannelAddedScore);
 		
 		presenter.setPannel(this);
+		
+		//retrive and cache the system's default "short" animation time.
+		mShortAnibationDuration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
 		
 		
 		//if prepared all settings, start game
@@ -86,7 +93,15 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		} else {
 			mNotiImage.setImageDrawable(getResources().getDrawable(R.drawable.answer_wrong));
 		}
+		crossfadeNotiImage();
 	}
 	
+	private void crossfadeNotiImage() {
+		mNotiImage.setAlpha(1f);
+		mNotiImage.animate()
+			.alpha(0f)
+			.setDuration(mShortAnibationDuration)
+			.setListener(null);
+	}
 
 }
