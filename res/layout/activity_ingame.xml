@@ -34,7 +34,7 @@
 	            android:layout_marginTop="30dp"
 	            android:layout_centerHorizontal="true"
 	            android:textSize="30dp"
-	            android:text="0"/>
+	            android:text="Start!"/>
             
             <LinearLayout 
                 android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:textSize="20dp"
-		            android:text="Score : "/>
+		            android:text="Score : 0"/>
                 
                 <TextView 
 	                android:id="@+id/textPannelAddedScore" 
@@ -67,7 +67,7 @@
 	            android:layout_gravity="right"
 	            android:layout_marginTop="20dp"
 	            android:text="@string/game_button_hint"
-	            android:background="#FFFFFFFF"/>
+	            android:background="#00ffffff"/>
         </LinearLayout>
     </LinearLayout>
     

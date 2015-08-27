@@ -29,6 +29,7 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	private ImageView mNotiImage;
 	private TextView mSumScore;
 	private TextView mAddedScore;
+	private TextView mRemainTime;
 	
 	private int mLongAnimationDuration;
 	private int mShortAnimationDuration;
@@ -55,6 +56,7 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		
 		mSumScore = (TextView)findViewById(R.id.textPannelSumScore);
 		mAddedScore = (TextView)findViewById(R.id.textPannelAddedScore);
+		mRemainTime = (TextView)findViewById(R.id.textPannelTime);
 		
 		presenter.setPannel(this);
 		
@@ -76,6 +78,12 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 			break;
 		}
 		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
 	}
 
 	@Override
@@ -118,6 +126,11 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	@Override
 	public void setEnableHint(boolean enabled) {
 		mBtnHint.setEnabled(enabled);
+	}
+	
+	@Override
+	public void setRemainTime(String seconds) {
+		mRemainTime.setText(seconds);
 	}
 
 }

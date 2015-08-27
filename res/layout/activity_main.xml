@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:padding="50dp"
         android:text="@string/main_title"
         android:textSize="50dip" />
     
@@ -25,6 +26,7 @@
             android:id="@+id/btnMainStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="50dp"
             android:text="@string/main_start"
             android:background="#00FFFFFF"/>
         

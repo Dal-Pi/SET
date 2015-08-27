@@ -2,6 +2,10 @@ package com.kania.set.presenter;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
 import android.util.Log;
 
 import com.kania.set.model.ColorProvider;
@@ -16,6 +20,10 @@ import com.kania.set.view.ISetPannelAction;
 public class SetPresenter extends Mediator {
 
 	//	private final int MAX_CARD_AMOUNT = 9;
+	private final String KEY_EVENT_TYPE = "eventtype";
+	private final int TIME_EVENT = 1;
+	private final int TIME_DELAY_MILLIS = 1000;
+	private final int TIME_LIMIT = 61;
 
 	private SetEngine mSetEngine;
 	
@@ -27,6 +35,31 @@ public class SetPresenter extends Mediator {
 	private ArrayList<SetCardData> mCandidates;
 	
 	private int mHintCount;
+	private int mRemainTime = 0;;
+	private int mBackButtonSecondGap = 3; //for escape game view
+	
+	public Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			Bundle data = msg.getData();
+			switch (data.getInt(KEY_EVENT_TYPE, 0)) {
+			case TIME_EVENT:
+				mRemainTime--;
+				
+				if (mRemainTime <= 0) {
+					mSetPannel.setRemainTime("End!");
+					mSetPannel.setEnableHint(false);
+					mHandler.removeMessages(TIME_EVENT);
+					lockAllCards();
+					//TODO go to rank activity
+				} else {
+					mSetPannel.setRemainTime("" + mRemainTime);
+					makeAndSendTimeEvent();
+				}
+				break;
+			}
+			
+		};
+	};
 
 	public SetPresenter() {
 		//init view and model
@@ -46,8 +79,11 @@ public class SetPresenter extends Mediator {
 	public void startGame() {
 		//init game
 		
+		
 		//mutex lock
 		lockAllCards();
+		
+		mRemainTime = TIME_LIMIT;
 		
 		mSetGameData = new SetGameData();
 		mCandidates = new ArrayList<SetCardData>();
@@ -58,6 +94,17 @@ public class SetPresenter extends Mediator {
 		
 		//mutex release
 		releaseAllCards();
+		
+		//start Game using timer
+		makeAndSendTimeEvent();
+	}
+	
+	public void makeAndSendTimeEvent() {
+		Message msg = Message.obtain();
+		Bundle data = new Bundle();
+		data.putInt(KEY_EVENT_TYPE, TIME_EVENT);
+		msg.setData(data);
+		mHandler.sendMessageDelayed(msg, TIME_DELAY_MILLIS);
 	}
 
 	@Override
