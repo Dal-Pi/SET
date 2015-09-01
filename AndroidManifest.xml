@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kania.set"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" android:installLocation="auto">
 
     <uses-sdk
-        android:minSdkVersion="12"
-        android:targetSdkVersion="16" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".view.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,8 @@
         </activity>
         
         <activity 
-            android:name=".view.SetInGameActivity">
+            android:name=".view.SetInGameActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

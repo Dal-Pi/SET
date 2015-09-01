@@ -10,5 +10,7 @@ public interface ISetPannelAction {
 	public abstract void setEnableHint(boolean enabled);
 	
 	public abstract void setRemainTime(String seconds);
+	
+	public abstract void setInputNameEnable(boolean enabled);
 
 }

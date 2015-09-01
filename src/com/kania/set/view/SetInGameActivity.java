@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,10 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	private TextView mAddedScore;
 	private TextView mRemainTime;
 	
+	private LinearLayout mFrameInputName;
+	private EditText mEditInputName;
+	private Button mBtnInputName;
+	
 	private int mLongAnimationDuration;
 	private int mShortAnimationDuration;
 	
@@ -41,22 +47,27 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		presenter = new SetPresenter();
 		
 		for (int i = 0; i < cardIds.length; ++i) {
-			SetCardView scv = (SetCardView)findViewById(cardIds[i]);
-			FrameLayout bg = (FrameLayout)findViewById(cardBGIds[i]);
+			SetCardView scv = (SetCardView) findViewById(cardIds[i]);
+			FrameLayout bg = (FrameLayout) findViewById(cardBGIds[i]);
 			scv.setMediator(presenter);
 			scv.setCardSlotNum(i);
 			scv.setBackgroundLayout(bg);
 			presenter.addSetCardView(scv);
 		}
 		
-		mBtnHint = (Button)findViewById(R.id.btnGameHint);
+		mBtnHint = (Button) findViewById(R.id.btnGameHint);
 		mBtnHint.setOnClickListener(this);
 		
-		mNotiImage = (ImageView)findViewById(R.id.imgPannelNoti);
+		mNotiImage = (ImageView) findViewById(R.id.imgPannelNoti);
 		
-		mSumScore = (TextView)findViewById(R.id.textPannelSumScore);
-		mAddedScore = (TextView)findViewById(R.id.textPannelAddedScore);
-		mRemainTime = (TextView)findViewById(R.id.textPannelTime);
+		mSumScore = (TextView) findViewById(R.id.textPannelSumScore);
+		mAddedScore = (TextView) findViewById(R.id.textPannelAddedScore);
+		mRemainTime = (TextView) findViewById(R.id.textPannelTime);
+		
+		mFrameInputName = (LinearLayout) findViewById(R.id.frameInputName);
+		mEditInputName = (EditText) findViewById(R.id.editInputName);
+		mBtnInputName = (Button) findViewById(R.id.btnInputName);
+		mBtnInputName.setOnClickListener(this);
 		
 		presenter.setPannel(this);
 		
@@ -75,6 +86,9 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		switch (v.getId()) {
 		case R.id.btnGameHint:
 			presenter.pushHint();
+			break;
+		case R.id.btnInputName:
+			Toast.makeText(this, "It is not implemented yet", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		
@@ -131,6 +145,11 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	@Override
 	public void setRemainTime(String seconds) {
 		mRemainTime.setText(seconds);
+	}
+	
+	@Override
+	public void setInputNameEnable(boolean enabled) {
+		mFrameInputName.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
 	}
 
 }

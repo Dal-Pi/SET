@@ -46,10 +46,11 @@ public class SetPresenter extends Mediator {
 				mRemainTime--;
 				
 				if (mRemainTime <= 0) {
+					lockAllCards();
+					mHandler.removeMessages(TIME_EVENT);
 					mSetPannel.setRemainTime("End!");
 					mSetPannel.setEnableHint(false);
-					mHandler.removeMessages(TIME_EVENT);
-					lockAllCards();
+					mSetPannel.setInputNameEnable(true);
 					//TODO go to rank activity
 				} else {
 					mSetPannel.setRemainTime("" + mRemainTime);
@@ -78,7 +79,7 @@ public class SetPresenter extends Mediator {
 	@Override
 	public void startGame() {
 		//init game
-		
+		mSetPannel.setInputNameEnable(false);
 		
 		//mutex lock
 		lockAllCards();

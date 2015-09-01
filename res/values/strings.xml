@@ -6,5 +6,7 @@
     <string name="main_title">SET</string>
     <string name="main_start">start</string>
     <string name="game_button_hint">hint</string>
+    <string name="game_button_input_name">register</string>
+    <string name="game_button_input_name_hint">Your name</string>
 
 </resources>
