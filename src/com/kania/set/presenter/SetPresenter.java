@@ -2,10 +2,14 @@ package com.kania.set.presenter;
 
 import java.util.ArrayList;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
 import android.util.Log;
 
 import com.kania.set.model.ColorProvider;
@@ -14,8 +18,11 @@ import com.kania.set.model.SetCardData;
 import com.kania.set.model.SetDeckData;
 import com.kania.set.model.SetEngine;
 import com.kania.set.model.SetGameData;
+import com.kania.set.model.SetRankContract.SetRankEntry;
+import com.kania.set.model.SetRankDBHelper;
 import com.kania.set.view.ISetCardAction;
 import com.kania.set.view.ISetPannelAction;
+import com.kania.set.view.SetRankActivity;
 
 public class SetPresenter extends Mediator {
 
@@ -25,6 +32,8 @@ public class SetPresenter extends Mediator {
 	private final int TIME_DELAY_MILLIS = 1000;
 	private final int TIME_LIMIT = 61;
 
+	private Context mContext;
+	
 	private SetEngine mSetEngine;
 	
 	private ArrayList<ISetCardAction> mCardViews;
@@ -37,6 +46,8 @@ public class SetPresenter extends Mediator {
 	private int mHintCount;
 	private int mRemainTime = 0;;
 	private int mBackButtonSecondGap = 3; //for escape game view
+	
+	private SetRankDBHelper mDbHelper;
 	
 	public Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -62,7 +73,8 @@ public class SetPresenter extends Mediator {
 		};
 	};
 
-	public SetPresenter() {
+	public SetPresenter(Context context) {
+		mContext = context;
 		//init view and model
 		mCardViews = new ArrayList<ISetCardAction>();
 		mSetEngine = new SetEngine();
@@ -205,5 +217,23 @@ public class SetPresenter extends Mediator {
 			mSetDeckData.setScore(0);
 			mSetPannel.setEnableHint(false);
 		}
+	}
+
+	@Override
+	public void inputUserName(String name) {
+		Intent intent = new Intent();
+		intent.setClass(mContext, SetRankActivity.class);
+		intent.putExtra("username", name);
+		mContext.startActivity(intent);
+		mSetPannel.finishGame();
+		
+		//TODO need to improve
+		mDbHelper = new SetRankDBHelper(mContext);
+		SQLiteDatabase db = mDbHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(SetRankEntry.COLUMN_NAME_NAME, name);
+		values.put(SetRankEntry.COLUMN_NAME_SCORE, mSetGameData.getScoreSum());
+		db.insert(SetRankEntry.TABLE_NAME, null, values);
+		db.close();
 	}
 }

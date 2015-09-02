@@ -12,5 +12,7 @@ public interface ISetPannelAction {
 	public abstract void setRemainTime(String seconds);
 	
 	public abstract void setInputNameEnable(boolean enabled);
+	
+	public abstract void finishGame();
 
 }

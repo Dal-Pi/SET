@@ -26,30 +26,31 @@
 	            android:padding="10dp"
 	            android:elevation="10dp"
             />
-	        <LinearLayout 
+	        <RelativeLayout 
 	            android:id="@+id/frameInputName"
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent"
-	            android:layout_gravity="center_horizontal"
-	            android:orientation="vertical" >
+	            android:layout_gravity="center_horizontal" >
 	            
 	            <EditText 
 	                android:id="@+id/editInputName"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
-		            android:layout_gravity="center_horizontal"
+		            android:layout_centerVertical="true"
 		            android:hint="@string/game_button_input_name_hint"
-		            android:singleLine="true" />
+		            android:singleLine="true"
+		            android:lines="1" />
 	            <Button 
 	                android:id="@+id/btnInputName"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
-		            android:layout_gravity="center_horizontal"
+		            android:layout_below="@id/editInputName"
+		            android:layout_centerVertical="true"
 		            android:layout_marginTop="20dp"
 		            android:background="#00ffffff"
 		            android:text="@string/game_button_input_name" />
 	            
-	        </LinearLayout>
+	        </RelativeLayout>
         </FrameLayout>
         
         <LinearLayout 

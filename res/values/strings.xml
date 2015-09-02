@@ -8,5 +8,7 @@
     <string name="game_button_hint">hint</string>
     <string name="game_button_input_name">register</string>
     <string name="game_button_input_name_hint">Your name</string>
+    <string name="rank_empty_name">Ranking</string>
+    <string name="rank_button_exit">exit</string>
 
 </resources>

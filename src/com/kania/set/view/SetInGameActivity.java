@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	private TextView mAddedScore;
 	private TextView mRemainTime;
 	
-	private LinearLayout mFrameInputName;
+	private RelativeLayout mFrameInputName;
 	private EditText mEditInputName;
 	private Button mBtnInputName;
 	
@@ -44,7 +45,7 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ingame);
-		presenter = new SetPresenter();
+		presenter = new SetPresenter(this);
 		
 		for (int i = 0; i < cardIds.length; ++i) {
 			SetCardView scv = (SetCardView) findViewById(cardIds[i]);
@@ -64,7 +65,7 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		mAddedScore = (TextView) findViewById(R.id.textPannelAddedScore);
 		mRemainTime = (TextView) findViewById(R.id.textPannelTime);
 		
-		mFrameInputName = (LinearLayout) findViewById(R.id.frameInputName);
+		mFrameInputName = (RelativeLayout) findViewById(R.id.frameInputName);
 		mEditInputName = (EditText) findViewById(R.id.editInputName);
 		mBtnInputName = (Button) findViewById(R.id.btnInputName);
 		mBtnInputName.setOnClickListener(this);
@@ -88,7 +89,11 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 			presenter.pushHint();
 			break;
 		case R.id.btnInputName:
-			Toast.makeText(this, "It is not implemented yet", Toast.LENGTH_SHORT).show();
+			String username = mEditInputName.getText().toString();
+			if (username == null || "".equals(username))
+				username = "Unknown";
+			presenter.inputUserName(username);
+//			Toast.makeText(this, "It is not implemented yet", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		
@@ -150,6 +155,11 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 	@Override
 	public void setInputNameEnable(boolean enabled) {
 		mFrameInputName.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	@Override
+	public void finishGame() {
+		finish();
 	}
 
 }

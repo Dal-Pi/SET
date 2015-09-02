@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/textRankText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dip"
+        android:layout_marginBottom="50dip"
+        android:text="@string/rank_empty_name"
+        android:textSize="50dip" />
+
+    <RelativeLayout 
+        android:id="@+id/frameRankButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+        <Button 
+            android:id="@+id/btnRankExit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="20dip"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/rank_button_exit"
+	        android:background="#00FFFFFF"/>
+    </RelativeLayout>
+    
+    <ListView 
+        android:id="@+id/listRank"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dip"
+        android:layout_marginRight="50dip"
+        android:layout_below="@id/textRankText"
+        android:layout_above="@id/frameRankButton"
+        android:layout_centerHorizontal="true"
+        
+        ></ListView>
+
+</RelativeLayout>

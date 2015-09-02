@@ -15,5 +15,7 @@ public abstract class Mediator {
 	public abstract void pushSetCard(int slotNum);
 	
 	public abstract void pushHint();
+	
+	public abstract void inputUserName(String name);
 
 }
