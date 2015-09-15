@@ -23,13 +23,17 @@ public class SetRankDBHelper extends SQLiteOpenHelper {
 			SetRankEntry._ID + " INTEGER PRIMARY KEY," +
 			/*SetRankEntry.COLUMN_NAME_RANK + INTEGET_TPYE + COMMA_SEP +*/
 			SetRankEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
-			SetRankEntry.COLUMN_NAME_SCORE + INTEGET_TPYE +
+			SetRankEntry.COLUMN_NAME_SCORE + INTEGET_TPYE + COMMA_SEP +
+			SetRankEntry.COLUMN_NAME_DIFFICULTY + INTEGET_TPYE +
 			" )";
 	private static final String SQL_DELETE_ENTRIES =
 		    "DROP TABLE IF EXISTS " + SetRankEntry.TABLE_NAME;
-	public static final String SQL_SELECT_ENTRIES = 
-			"SELECT * FROM " + SetRankEntry.TABLE_NAME + " ORDER BY " + SetRankEntry.COLUMN_NAME_SCORE + " DESC";
-
+	public static final String SQL_SELECT_ENTRIES_PRE = 
+			"SELECT * FROM " + SetRankEntry.TABLE_NAME + 
+			" WHERE " + SetRankEntry.COLUMN_NAME_DIFFICULTY + " = ";
+	public static final String SQL_SELECT_ENTRIES_POST = 
+			" ORDER BY " + SetRankEntry.COLUMN_NAME_SCORE + " DESC";
+	
 	public SetRankDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -53,6 +57,10 @@ public class SetRankDBHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(SQL_DELETE_ENTRIES);
 		onCreate(db);
+	}
+	
+	public String getSelectQueryString(int difficulty) {
+		return SQL_SELECT_ENTRIES_PRE + difficulty + SQL_SELECT_ENTRIES_POST;
 	}
 }
 

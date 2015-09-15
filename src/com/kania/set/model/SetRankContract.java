@@ -11,5 +11,6 @@ public final class SetRankContract {
 //        public static final String COLUMN_NAME_RANK = "rank";
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_SCORE = "score";
+        public static final String COLUMN_NAME_DIFFICULTY = "difficulty";
 	}
 }

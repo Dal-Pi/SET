@@ -2,9 +2,9 @@ package com.kania.set.view;
 
 import java.util.ArrayList;
 
+import com.kania.set.ColorProvider;
 import com.kania.set.R;
-import com.kania.set.model.ColorProvider;
-import com.kania.set.model.ShapeProvider;
+import com.kania.set.ShapeProvider;
 import com.kania.set.presenter.Mediator;
 
 import android.content.Context;

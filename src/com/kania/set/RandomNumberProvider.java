@@ -1,4 +1,4 @@
-package com.kania.set.model;
+package com.kania.set;
 
 import java.util.ArrayList;
 import java.util.Random;

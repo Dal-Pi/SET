@@ -1,20 +1,18 @@
 package com.kania.set.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kania.set.R;
+import com.kania.set.SetGameInfo;
 import com.kania.set.presenter.SetPresenter;
 
 public class SetInGameActivity extends Activity implements View.OnClickListener, ISetPannelAction {
@@ -46,6 +44,10 @@ public class SetInGameActivity extends Activity implements View.OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ingame);
 		presenter = new SetPresenter(this);
+		
+		Intent intent = getIntent();
+		int difficulty = intent.getIntExtra(SetGameInfo.DIFFICULTY_NAME, 0);
+		presenter.setDifficulty(difficulty);
 		
 		for (int i = 0; i < cardIds.length; ++i) {
 			SetCardView scv = (SetCardView) findViewById(cardIds[i]);

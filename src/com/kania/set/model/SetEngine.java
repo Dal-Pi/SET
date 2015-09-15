@@ -2,6 +2,9 @@ package com.kania.set.model;
 
 import java.util.ArrayList;
 
+import com.kania.set.RandomNumberProvider;
+import com.kania.set.SetGameInfo;
+
 import android.util.Log;
 
 public class SetEngine {
@@ -16,7 +19,7 @@ public class SetEngine {
 	public SetEngine() {
 	}
 	
-	public SetDeckData getNewDeck(int amount) {
+	public SetDeckData getNewDeck(int amount, int difficulty) {
 		ArrayList<SetCardData> cardList = getAllCards();
 		ArrayList<SetCardData> randomCardList = new ArrayList<SetCardData>();
 		ArrayList<SetCardData> newCards = new ArrayList<SetCardData>();
@@ -25,24 +28,46 @@ public class SetEngine {
 			randomCardList.add(cardList.get(sequence.get(i)));
 		}
 		
-		//select two cards
+		//first card is member of solution absolutely
 		SetCardData firstCard = randomCardList.get(sequence.get(0));
-		SetCardData secondCard = randomCardList.get(sequence.get(1));
-		Log.d("SET", "Find first card! :" + firstCard.getColor() + firstCard.getShape() + firstCard.getFilter());
+		Log.d("SET", "[All] Find first card! :" + firstCard.getColor() + firstCard.getShape() + firstCard.getFilter());
 		newCards.add(firstCard);
-		Log.d("SET", "Find second card! :" + secondCard.getColor() + secondCard.getShape() + secondCard.getFilter());
-		newCards.add(secondCard);
-		//remove card for avoid duplication
-		randomCardList.remove(firstCard);
-		randomCardList.remove(secondCard);
+		SetCardData secondCard = null;
+		SetCardData thirdCard = null;
 		
+		if (difficulty == SetGameInfo.DIFFICULTY_HARD) {
+			//select second card
+			secondCard = randomCardList.get(sequence.get(1));
+			Log.d("SET", "[Hard] Find second card! :" + secondCard.getColor() + secondCard.getShape() + secondCard.getFilter());
+			newCards.add(secondCard);
+			//remove card for avoid duplication
+			randomCardList.remove(firstCard);
+			randomCardList.remove(secondCard);
+		} else if (difficulty == SetGameInfo.DIFFICULTY_EASY) {
+			randomCardList.remove(firstCard);
+			for (SetCardData scd : randomCardList) {
+				int matchCount = 0;
+				//count matched attribute
+				if (firstCard.getColor() == scd.getColor()) matchCount++;
+				if (firstCard.getShape() == scd.getShape()) matchCount++;
+				if (firstCard.getFilter() == scd.getFilter()) matchCount++;
+				
+				if (matchCount == 2) {
+					secondCard = scd;
+					Log.d("SET", "[Easy] Find second card! :" + secondCard.getColor() + secondCard.getShape() + secondCard.getFilter());
+					newCards.add(secondCard);
+					break;
+				}
+			}
+			randomCardList.remove(secondCard);
+		}
 		
 		//calculate SET from two cards
-		int incompleteColor = (newCards.get(0).getColor() + newCards.get(1).getColor()) % CASE_OF_COLOR;
-		int incompleteShape = (newCards.get(0).getShape() + newCards.get(1).getShape()) % CASE_OF_SHAPE;
-		int incompleteFilter = (newCards.get(0).getFilter() + newCards.get(1).getFilter()) % CASE_OF_FILTER;
+		int incompleteColor = (firstCard.getColor() + secondCard.getColor()) % CASE_OF_COLOR;
+		int incompleteShape = (firstCard.getShape() + secondCard.getShape()) % CASE_OF_SHAPE;
+		int incompleteFilter = (firstCard.getFilter() + secondCard.getFilter()) % CASE_OF_FILTER;
 		//it is the third card
-		SetCardData thirdCard = null;
+		
 		int thirdCardColor = (CASE_OF_COLOR - incompleteColor) % CASE_OF_COLOR;
 		int thirdCardShape = (CASE_OF_SHAPE - incompleteShape) % CASE_OF_SHAPE;
 		int thirdCardFilter = (CASE_OF_FILTER - incompleteFilter) % CASE_OF_FILTER;
@@ -53,7 +78,7 @@ public class SetEngine {
 				break;
 			}
 		}
-		Log.d("SET", "Find third card! :" + thirdCard.getColor() + thirdCard.getShape() + thirdCard.getFilter());
+		Log.d("SET", "[All] Find third card! :" + thirdCard.getColor() + thirdCard.getShape() + thirdCard.getFilter());
 		newCards.add(thirdCard);
 		
 		ArrayList<SetCardData> forCheck = new ArrayList<SetCardData>();

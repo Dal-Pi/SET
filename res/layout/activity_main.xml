@@ -14,24 +14,57 @@
         android:text="@string/main_title"
         android:textSize="100dip" />
     
-    <LinearLayout 
+    <FrameLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        >
-        
-        <Button 
-            android:id="@+id/btnMainStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="100dp"
-            android:text="@string/main_start"
-            android:background="#00FFFFFF"/>
-        
-        
-        
-    </LinearLayout>
+        android:layout_centerHorizontal="true" >
+	    <LinearLayout 
+	        android:id="@+id/pannelStart"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        >
+	        
+	        <Button 
+	            android:id="@+id/btnMainStart"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:padding="100dp"
+	            android:text="@string/main_start"
+	            android:background="#00FFFFFF"/>
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:id="@+id/pannelDifficulty"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+	        <Button 
+	            android:id="@+id/btnMainEasy"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:paddingTop="100dp"
+	            android:paddingBottom="100dp"
+	            android:text="@string/main_easy"
+	            android:background="#00FFFFFF"/>
+	        
+	        <Button 
+	            android:id="@+id/btnMainHard"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:paddingTop="100dp"
+	            android:paddingBottom="100dp"
+	            android:text="@string/main_hard"
+	            android:background="#00FFFFFF"/>
+	        
+	        
+	    </LinearLayout>
+	    
+	    
+	</FrameLayout>
 
 </RelativeLayout>

@@ -12,8 +12,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.kania.set.model.ColorProvider;
-import com.kania.set.model.RandomNumberProvider;
+import com.kania.set.ColorProvider;
+import com.kania.set.RandomNumberProvider;
+import com.kania.set.SetGameInfo;
 import com.kania.set.model.SetCardData;
 import com.kania.set.model.SetDeckData;
 import com.kania.set.model.SetEngine;
@@ -30,8 +31,7 @@ public class SetPresenter extends Mediator {
 	private final String KEY_EVENT_TYPE = "eventtype";
 	private final int TIME_EVENT = 1;
 	private final int TIME_DELAY_MILLIS = 1000;
-	private final int TIME_LIMIT = 61;
-
+	
 	private Context mContext;
 	
 	private SetEngine mSetEngine;
@@ -42,6 +42,8 @@ public class SetPresenter extends Mediator {
 	private SetDeckData mSetDeckData;
 	private ArrayList<Integer> mCardPositions;
 	private ArrayList<SetCardData> mCandidates;
+	
+	private int mDifficulty;
 	
 	private int mHintCount;
 	private int mRemainTime = 0;;
@@ -87,6 +89,10 @@ public class SetPresenter extends Mediator {
 	public void setPannel(ISetPannelAction pannel) {
 		mSetPannel = pannel;
 	}
+	
+	public void setDifficulty(int difficulty) {
+		mDifficulty = difficulty;
+	}
 
 	@Override
 	public void startGame() {
@@ -96,7 +102,7 @@ public class SetPresenter extends Mediator {
 		//mutex lock
 		lockAllCards();
 		
-		mRemainTime = TIME_LIMIT;
+		mRemainTime = SetGameInfo.TIME_LIMIT;
 		
 		mSetGameData = new SetGameData();
 		mCandidates = new ArrayList<SetCardData>();
@@ -127,7 +133,7 @@ public class SetPresenter extends Mediator {
 		//make deck
 		mCardPositions.clear();
 		mCardPositions = RandomNumberProvider.getRandomNumber(mCardViews.size());
-		mSetDeckData = mSetEngine.getNewDeck(mCardViews.size());
+		mSetDeckData = mSetEngine.getNewDeck(mCardViews.size(), mDifficulty);
 		//init hint
 		mHintCount = 0;
 		mSetPannel.setEnableHint(true);
@@ -223,7 +229,8 @@ public class SetPresenter extends Mediator {
 	public void inputUserName(String name) {
 		Intent intent = new Intent();
 		intent.setClass(mContext, SetRankActivity.class);
-		intent.putExtra("username", name);
+		intent.putExtra(SetGameInfo.RESULT_USER_NAME, name);
+		intent.putExtra(SetGameInfo.DIFFICULTY_NAME, mDifficulty);
 		mContext.startActivity(intent);
 		mSetPannel.finishGame();
 		
@@ -233,6 +240,7 @@ public class SetPresenter extends Mediator {
 		ContentValues values = new ContentValues();
 		values.put(SetRankEntry.COLUMN_NAME_NAME, name);
 		values.put(SetRankEntry.COLUMN_NAME_SCORE, mSetGameData.getScoreSum());
+		values.put(SetRankEntry.COLUMN_NAME_DIFFICULTY, mDifficulty);
 		db.insert(SetRankEntry.TABLE_NAME, null, values);
 		db.close();
 	}
