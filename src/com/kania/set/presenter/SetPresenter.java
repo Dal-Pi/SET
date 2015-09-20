@@ -15,6 +15,7 @@ import android.util.Log;
 import com.kania.set.ColorProvider;
 import com.kania.set.RandomNumberProvider;
 import com.kania.set.SetGameInfo;
+import com.kania.set.ShapeProvider;
 import com.kania.set.model.SetCardData;
 import com.kania.set.model.SetDeckData;
 import com.kania.set.model.SetEngine;
@@ -130,6 +131,7 @@ public class SetPresenter extends Mediator {
 	public void makeDeck(int amount) {
 		//refresh color and ...TODO
 		ColorProvider.refreshColors();
+		ShapeProvider.refreshShapes();
 		//make deck
 		mCardPositions.clear();
 		mCardPositions = RandomNumberProvider.getRandomNumber(mCardViews.size());

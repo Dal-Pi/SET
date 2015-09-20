@@ -2,8 +2,6 @@ package com.kania.set;
 
 import java.util.ArrayList;
 
-import com.kania.set.R;
-
 public class ColorProvider {
 	public static int[] mColors = {R.color.pastel_blue, R.color.pastel_pink, R.color.pastel_green,
 		R.color.pastel_yellow, R.color.pastel_purple, R.color.pastel_orange};
