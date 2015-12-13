@@ -3,8 +3,8 @@ package com.kania.set;
 import java.util.ArrayList;
 
 public class ShapeProvider {
-	public static int[] mShapes = {R.drawable.basic_circle, R.drawable.basic_square, R.drawable.basic_triangle, 
-		R.drawable.basic_diamond /*, R.drawable.basic_plus*/, R.drawable.basic_star};
+	public static int[] mShapes = {R.drawable.basic_circle, R.drawable.basic_square, R.drawable.basic_triangle/*, 
+		R.drawable.basic_diamond /*, R.drawable.basic_plus, R.drawable.basic_star*/};
 	
 	public static ArrayList<Integer> mShapePos = RandomNumberProvider.getRandomNumber(mShapes.length);
 	
