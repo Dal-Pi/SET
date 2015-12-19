@@ -1,6 +1,5 @@
 package com.kania.set.presenter;
 
-import java.util.ArrayList;
 
 public abstract class Mediator {
 	public abstract void startGame();

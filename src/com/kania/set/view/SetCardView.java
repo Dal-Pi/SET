@@ -2,20 +2,13 @@ package com.kania.set.view;
 
 import java.util.ArrayList;
 
-import com.kania.set.ColorProvider;
-import com.kania.set.R;
-import com.kania.set.ShapeProvider;
-import com.kania.set.presenter.Mediator;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,7 +18,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.kania.set.ColorProvider;
+import com.kania.set.R;
+import com.kania.set.ShapeProvider;
+import com.kania.set.presenter.Mediator;
 
 public class SetCardView extends ImageView implements View.OnClickListener, ISetCardAction {
 	

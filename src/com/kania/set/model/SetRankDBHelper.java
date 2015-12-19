@@ -1,12 +1,10 @@
 package com.kania.set.model;
 
-import com.kania.set.model.SetRankContract.SetRankEntry;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.kania.set.model.SetRankContract.SetRankEntry;
 
 	
 public class SetRankDBHelper extends SQLiteOpenHelper {
