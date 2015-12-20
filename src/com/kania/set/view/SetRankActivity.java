@@ -62,18 +62,6 @@ public class SetRankActivity extends Activity implements View.OnClickListener {
 		}
 		mTextRank.setText(titleName);
 	}
-	
-	@Override
-	protected void onResume() {
-		// TODO if need animation.
-		super.onResume();
-	}
-	
-	@Override
-	protected void onStop() {
-		mCursor.close();
-		super.onStop();
-	}
 
 	@Override
 	public void onClick(View v) {
